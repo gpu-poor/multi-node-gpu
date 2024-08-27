@@ -3,7 +3,7 @@
 # Configuration
 TOTAL_NODES=2
 GPUS_PER_NODE=1
-CPUS_PER_TASK=96
+CPUS_PER_TASK=4
 MASTER_ADDR="147.189.195.2"  # EDIT: IP of the first VM
 MASTER_PORT=6000
 NODE_RANK=0  # EDIT: Set to 0 for first VM, 1 for second VM
