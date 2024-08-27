@@ -77,7 +77,7 @@ device = torch.device("cuda", local_rank)
 hostname = socket.gethostname()
 
 gpu = f"[{hostname}:{local_rank}]"
-
+print("outside try")
 try:
     # XXX: possibly change the dist timeout to something much shorter to get this script to fail
     # fast if there is a problem and not wait for the default 30min
