@@ -8,6 +8,9 @@
 
 Make sure to use ip which are visible in `ifconfig`
 
+some of useful package :
+ > ```pip install torchsummary```
+
 command to launch distributed processes
 
 ```shell
