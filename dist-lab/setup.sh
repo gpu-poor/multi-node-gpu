@@ -36,6 +36,7 @@ sudo apt-get install -y -qq \
 # ── 2. Install uv ───────────────────────────────────────────────────
 if ! command -v uv &>/dev/null; then
     echo ">>> Installing uv..."
+    mkdir -p "$HOME/.config" "$HOME/.local/bin"
     curl -LsSf https://astral.sh/uv/install.sh | INSTALLER_NO_MODIFY_PATH=1 sh
     # Make uv available in current shell
     export PATH="$HOME/.local/bin:$PATH"
