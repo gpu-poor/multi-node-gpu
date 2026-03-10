@@ -22,8 +22,10 @@ VENV_DIR="$SCRIPT_DIR/.venv"
 
 # ── 1. System packages ──────────────────────────────────────────────
 echo ">>> Installing system dependencies..."
-sudo apt-get update -qq
-sudo apt-get install -y -qq \
+# DPkg::Lock::Timeout makes apt wait (up to 5 min) for the lock instead
+# of failing immediately — avoids races with unattended-upgrades on boot.
+sudo apt-get update -qq -o DPkg::Lock::Timeout=300
+sudo apt-get install -y -qq -o DPkg::Lock::Timeout=300 \
     build-essential \
     curl \
     git \
@@ -37,6 +39,11 @@ sudo apt-get install -y -qq \
 if ! command -v uv &>/dev/null; then
     echo ">>> Installing uv..."
     mkdir -p "$HOME/.config" "$HOME/.local/bin"
+    # Ensure ~/.config is owned by the current user (it may have been
+    # created by a root-level process on first boot).
+    if [ "$(stat -c '%U' "$HOME/.config")" != "$(whoami)" ]; then
+        sudo chown -R "$(whoami)":"$(id -gn)" "$HOME/.config"
+    fi
     curl -LsSf https://astral.sh/uv/install.sh | INSTALLER_NO_MODIFY_PATH=1 sh
     # Make uv available in current shell
     export PATH="$HOME/.local/bin:$PATH"
