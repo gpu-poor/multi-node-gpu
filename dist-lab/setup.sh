@@ -117,3 +117,5 @@ else
     echo "CPU mode was selected. Re-run with --gpu for CUDA/NCCL support."
 fi
 echo ""
+
+#sudo apt-get update -qq && sudo apt-get install -y -qq git && cd /home/$(whoami) && git clone https://github.com/gpu-poor/multi-node-gpu.git && cd multi-node-gpu && git checkout dist-lab-exercises && cd dist-lab && bash setup.sh
